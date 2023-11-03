@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey("a")) 
         {
-            newPosition.x += speed;
+            newPosition.x -= speed;
         
                 
         
         }
         if (Input.GetKey("d")) 
         {
-            newPosition.x -= speed;
+            newPosition.x += speed;
         
         
         
