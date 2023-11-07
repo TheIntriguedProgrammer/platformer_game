@@ -10,7 +10,7 @@ public class Hori_platformer : MonoBehaviour
     public float movement_speed;
     public float travel_distance;
     private float origin;
-    private bool loop = false;
+    private bool endstop = true;
     //public int code_rate; // this variable is used to regulate the turn back speed of the platform
     // Start is called before the first frame update
     void Start()
@@ -24,31 +24,34 @@ public class Hori_platformer : MonoBehaviour
     {
         Vector3 newposition = transform.position;
 
-        if (newposition.x < travel_distance && newposition.x != travel_distance && loop = false)
+        if (newposition.x == travel_distance)
+        {
+            endstop = true;
+        }
+        
+        if (endstop == false)
         {
             newposition.x += movement_speed;
         }
 
-        if (newpostion.x == travel_distance)
+        if ( newposition.x == origin)
         {
 
-            loop = true;
+            endstop = false;
         }
 
-        if (newposition.x > origin && newposition.x != origin && loop = true)
+        if (endstop == true)
         {
             newposition.x -= movement_speed;
         }
-        if (newposition.x == origin)
-        {
-            loop = false;
-        }
+        
 
 
 
         if (newposition.x == origin)
         {
             Debug.Log("1");
+            Debug.Log(endstop);
         }
 
 
