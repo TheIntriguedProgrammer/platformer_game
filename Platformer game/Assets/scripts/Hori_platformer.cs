@@ -23,27 +23,7 @@ public class Hori_platformer : MonoBehaviour
     void Update()
     {
         Vector3 newposition = transform.position;
-
-        if (newposition.x == travel_distance)
-        {
-            endstop = true;
-        }
         
-        if (endstop == false)
-        {
-            newposition.x += movement_speed;
-        }
-
-        if ( newposition.x == origin)
-        {
-
-            endstop = false;
-        }
-
-        if (endstop == true)
-        {
-            newposition.x -= movement_speed;
-        }
         
 
 
@@ -51,9 +31,12 @@ public class Hori_platformer : MonoBehaviour
         if (newposition.x == origin)
         {
             Debug.Log("1");
-            Debug.Log(endstop);
+            
         }
 
+        Debug.Log(endstop);
+      
+        Debug.Log(travel_distance);
 
 
 
@@ -74,6 +57,11 @@ public class Hori_platformer : MonoBehaviour
     
     
     
+    }
+
+    void hoverplatform()
+    {
+
     }
 
 
