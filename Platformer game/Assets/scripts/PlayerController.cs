@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     // layer assign to the ground
     public LayerMask groundLayer;
     public Transform groundCheck;
-    public bool Onground;
+    public bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.transform, .5f, groundLayer);
         Vector3 newPosition = transform.position;
         Vector3 newScale = transform.localScale;
         float currentScale = Mathf.Abs(transform.localScale.x);
@@ -50,11 +51,13 @@ public class PlayerController : MonoBehaviour
         
         }
 
-        if (Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow) && isGrounded == true)
             // get keydown check for the inital key press
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             // the line above sets the velocity to a new vector2 variable with a the x velocity remaining as is and the y velocity is assign jumpforce
+
+
         }
 
         transform.position = newPosition;
