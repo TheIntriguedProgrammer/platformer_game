@@ -15,16 +15,19 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     public bool isGrounded;
 
+    SpriteRenderer sprite;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.transform, .5f, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, .5f, groundLayer);
         Vector3 newPosition = transform.position;
         Vector3 newScale = transform.localScale;
         float currentScale = Mathf.Abs(transform.localScale.x);
