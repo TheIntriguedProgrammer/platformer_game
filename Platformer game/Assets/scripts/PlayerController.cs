@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     //ground check Variable 
     // tells that the player is one the "ground layer"
     // layer assign to the ground
-    public LayerMask groundLayer;
-    public Transform groundCheck;
+    public LayerMask groundLayer; // layer information
+    public Transform groundCheck; // player position info
     public bool isGrounded;
 
     SpriteRenderer sprite;

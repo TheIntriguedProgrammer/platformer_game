@@ -15,7 +15,7 @@ public class Hori_platformer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        origin = transform.position.x;
+        origin = transform.position.y;
         Debug.Log(origin);
     }
 
@@ -24,20 +24,20 @@ public class Hori_platformer : MonoBehaviour
     {
         Vector3 newposition = transform.position;
         
-        if (newposition.x < endpoint && endstop == false)
+        if (newposition.y < endpoint && endstop == false)
         {
-            newposition.x += movement_speed;
+            newposition.y += movement_speed;
         }
-        if (newposition.x > endpoint)
+        if (newposition.y > endpoint)
         {
             Debug.Log("it works thank God");
             endstop = true;
         }
-        if (newposition.x > origin && endstop == true)
+        if (newposition.y > origin && endstop == true)
         {
-            newposition.x -= movement_speed;
+            newposition.y -= movement_speed;
         }
-        if (newposition.x == origin)
+        if (newposition.y == origin)
         {
             endstop = false;
         }
@@ -75,10 +75,7 @@ public class Hori_platformer : MonoBehaviour
     
     }
 
-    void hoverplatform()
-    {
-
-    }
+    
 
 
 
