@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         
         }
 
-        if (Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow) && isGrounded == true)
+        if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded == true)
             // get keydown check for the inital key press
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
