@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // Animation variables 
     Animator anim;
     public bool moving = false;
+    public bool jumping = false;
 
 
 
@@ -71,6 +72,10 @@ public class PlayerController : MonoBehaviour
         {
             moving = false;
         }
+        if (isGrounded == true)
+        {
+            jumping = false;
+        }
 
 
         if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded == true)
@@ -79,13 +84,14 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             // the line above sets the velocity to a new vector2 variable with a the x velocity remaining as is and the y velocity is assign jumpforce
 
-
+            jumping = true;
         }
 
 
 
 
         anim.SetBool("isMoving", moving);
+        anim.SetBool("isJumping", jumping);  
         transform.position = newPosition;
         transform.localScale = newScale;
 
