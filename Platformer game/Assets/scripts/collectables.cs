@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class collectables : MonoBehaviour
 {
-    public AudioSource collectablesound;
+   // public AudioSource collectablesound;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +19,20 @@ public class collectables : MonoBehaviour
 
 
 
-    private void OncollisionEnter2D(Collision2D collision){
-
-        if (collision.gameObject.tag.Equals("squares")){
-            Debug.Log("ahh got it");
-            collectablesound.Play();
-            Destroy(this.gameObject);//This destroy the object on collection
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Debug.Log("ah got the thing");
+          //  collectablesound.Play();
+            Destroy(this.gameObject);//destroy  object [ this destroys the object the script is on 
         }
+
+
+
+
+
+
     }
 }
 
