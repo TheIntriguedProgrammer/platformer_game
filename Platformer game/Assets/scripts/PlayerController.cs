@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             // the line above sets the velocity to a new vector2 variable with a the x velocity remaining as is and the y velocity is assign jumpforce
 
+            
+        }
+        if (isGrounded != true)
+        {
             jumping = true;
         }
 
