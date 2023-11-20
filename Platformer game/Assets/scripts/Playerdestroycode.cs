@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class collectables : MonoBehaviour
+public class Playerdestroycode : MonoBehaviour
 {
-   // public AudioSource collectablesound;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,22 +17,13 @@ public class collectables : MonoBehaviour
         
     }
 
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("ah got the thing");
-          //  collectablesound.Play();
-            Destroy(this.gameObject);//destroy  object [ this destroys the object the script is on 
+            Debug.Log("hit your dead");
+            SceneManager.LoadScene(0);
+
         }
-
-
-
-
-
-
     }
 }
-
