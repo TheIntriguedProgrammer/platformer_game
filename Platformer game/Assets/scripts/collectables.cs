@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class collectables : MonoBehaviour
 {
-   // public AudioSource collectablesound;
+    public AudioSource collectablesound;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,7 @@ public class collectables : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             Debug.Log("ah got the thing");
-          //  collectablesound.Play();
+            collectablesound.Play();
             Destroy(this.gameObject);//destroy  object [ this destroys the object the script is on 
         }
 
