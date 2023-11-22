@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Hori_platformer : MonoBehaviour
+public class fallingwalls : MonoBehaviour
 {
 
 
     public float movement_speed;
-    public float endpoint;
+    public float endpoint;// end point must be greater than origin
     private float origin;
     private bool endstop = false;
     //public int code_rate; // this variable is used to regulate the turn back speed of the platform
@@ -17,13 +17,15 @@ public class Hori_platformer : MonoBehaviour
     {
         origin = transform.position.y;
         Debug.Log(origin);
+        Debug.Log("origin");
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 newposition = transform.position;
-        
+
         if (newposition.y < endpoint && endstop == false)
         {
             newposition.y += movement_speed;
@@ -37,7 +39,7 @@ public class Hori_platformer : MonoBehaviour
         {
             newposition.y -= movement_speed;
         }
-        if (newposition.y == origin)
+        if (newposition.y < origin || newposition.y == origin)
         {
             endstop = false;
         }
@@ -45,46 +47,29 @@ public class Hori_platformer : MonoBehaviour
 
 
 
-       // if (newposition.x == origin)
-       // {
-       //     Debug.Log("1");
-            
-       // }
+        // if (newposition.x == origin)
+        // {
+        //     Debug.Log("1");
 
-       // Debug.Log(newposition.x);
-      
-
-
-
-
-
-
+        // }
+          Debug.Log("current");
+          Debug.Log(newposition.y);
+          Debug.Log(endstop);
 
 
         transform.position = newposition;
- 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
     }
-
-    
-
-
-
-
-
-
-
-
-
 
 
 }
