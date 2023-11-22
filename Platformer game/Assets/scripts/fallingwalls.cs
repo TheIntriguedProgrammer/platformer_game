@@ -16,8 +16,8 @@ public class fallingwalls : MonoBehaviour
     void Start()
     {
         origin = transform.position.y;
-        Debug.Log(origin);
-        Debug.Log("origin");
+        //Debug.Log(origin);
+       // Debug.Log("origin");
 
     }
 
@@ -32,7 +32,7 @@ public class fallingwalls : MonoBehaviour
         }
         if (newposition.y > endpoint)
         {
-            Debug.Log("it works thank God");
+            //Debug.Log("it works thank God");
             endstop = true;
         }
         if (newposition.y > origin && endstop == true)
@@ -52,9 +52,9 @@ public class fallingwalls : MonoBehaviour
         //     Debug.Log("1");
 
         // }
-          Debug.Log("current");
-          Debug.Log(newposition.y);
-          Debug.Log(endstop);
+          //Debug.Log("current");
+          //Debug.Log(newposition.y);
+          //Debug.Log(endstop);
 
 
         transform.position = newposition;

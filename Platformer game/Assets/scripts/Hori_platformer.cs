@@ -16,7 +16,7 @@ public class Hori_platformer : MonoBehaviour
     void Start()
     {
         origin = transform.position.y;
-        Debug.Log(origin);
+        //Debug.Log(origin);
     }
 
     // Update is called once per frame
@@ -30,14 +30,14 @@ public class Hori_platformer : MonoBehaviour
         }
         if (newposition.y > endpoint)
         {
-            Debug.Log("it works thank God");
+            //Debug.Log("it works thank God");
             endstop = true;
         }
         if (newposition.y > origin && endstop == true)
         {
             newposition.y -= movement_speed;
         }
-        if (newposition.y == origin)
+        if (newposition.y < origin || newposition.y == origin)
         {
             endstop = false;
         }
