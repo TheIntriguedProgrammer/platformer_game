@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb; // create reference for the rigidbody becuase jump requires physics
     public float jumpForce;// the force that will be added to the vertical component of player's velocity
     public float speed;
-
+    
+    public float hangtime; // this is the period of time after the player has left the ground in which they can press jump.
+    private float hangcounter;
     //ground check Variable 
     // tells that the player is one the "ground layer"
     // layer assign to the ground
@@ -75,10 +77,11 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             jumping = false;
+            hangcounter = hangtime; // here we are setting the hangcounter to hangtime
         }
 
 
-        if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded == true)
+        if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true || hangcounter > 0))
             // get keydown check for the inital key press
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -86,9 +89,18 @@ public class PlayerController : MonoBehaviour
 
             
         }
+
+        // this line of code allow the character to do half jumps
+        if (Input.GetKeyUp("w") && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce * 0.5f);
+        }
+
+
         if (isGrounded != true)
         {
             jumping = true;
+            hangcounter -= Time.deltaTime; // this piece of code reduces the hangcounter after each frame.
         }
 
 

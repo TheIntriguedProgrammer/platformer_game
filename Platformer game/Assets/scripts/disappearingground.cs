@@ -8,6 +8,8 @@ public class disappearingground : MonoBehaviour
     public int delaytime;
     private int destroytime;
     private bool oncetrigger=false;
+    private int respawn_time;
+    public GameObject log;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,9 @@ public class disappearingground : MonoBehaviour
             if (oncetrigger == true)
             {
                 destroytime = frame_rate + delaytime;
-                oncetrigger = false; }
+                oncetrigger = false;
+                respawn_time = frame_rate + delaytime *2;
+                }
 
             if (frame_rate == destroytime && oncetrigger == false)
             {
@@ -36,6 +40,18 @@ public class disappearingground : MonoBehaviour
                 Debug.Log("activate");
 
             }
+        if (GameObject.Find("Fallinglog(Clone)") == null && frame_rate == respawn_time)
+        {
+            // creates an instance of the game object
+            Instantiate(log);
+        
+        
+        
+        
+        
+        }
+           
+
 
             
 
@@ -48,7 +64,7 @@ public class disappearingground : MonoBehaviour
 
         if (collision.gameObject.tag.Equals("Player")){
 
-            oncetrigger=true;
+            oncetrigger=true; // changes when the player lands on the platform.
             Debug.Log("landed");
 
         }
