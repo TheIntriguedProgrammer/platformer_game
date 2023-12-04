@@ -36,10 +36,15 @@ public class disappearingground : MonoBehaviour
 
             if (frame_rate == destroytime && oncetrigger == false)
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
                 Debug.Log("activate");
 
             }
+
+            if (oncetrigger == false && GameObject.Find("Fallinglog(Clone)"))
+        {
+            // this is to recreate the log after it is distroyed
+        }
         if (GameObject.Find("Fallinglog(Clone)") == null && frame_rate == respawn_time)
         {
             // creates an instance of the game object
