@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // position of the player start 
+    private float origin_x;
+    private float origin_y;
+    public float respawndelay;
+    private bool Dead = false;
     // Animation variables 
     Animator anim;
     public bool moving = false;
@@ -34,6 +39,10 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        origin_x = transform.position.x;
+        origin_y = transform.position.y;
+        //Debug.Log( origin);
+
 
 
     }
@@ -104,6 +113,17 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        if ( Dead != false) 
+        {
+            respawndelay -= Time.deltaTime;
+            if (respawndelay > 0)
+            {
+                Debug.Log("TESTING");
+            }
+
+        }
+
+
 
 
         anim.SetBool("isMoving", moving);
@@ -119,5 +139,19 @@ public class PlayerController : MonoBehaviour
 
 
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("deathzone"))
+        {
+            Debug.Log("hit your dead");
+            Dead = true;
+            this.gameObject.SetActive(false);
+
+
+
+
+        }
     }
 }

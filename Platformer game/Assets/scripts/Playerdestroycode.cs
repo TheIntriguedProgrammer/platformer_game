@@ -14,7 +14,16 @@ public class Playerdestroycode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (Dead != false)
+        {
+            respawndelay -= Time.deltaTime;
+            if (respawndelay > 0)
+            {
+                Debug.Log("TESTING");
+            }
+
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -22,7 +31,8 @@ public class Playerdestroycode : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             Debug.Log("hit your dead");
-            SceneManager.LoadScene(0);
+            Dead = true;
+            Player.gameObject.SetActive(false);
 
         }
     }
