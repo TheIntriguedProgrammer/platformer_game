@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class disappearingground : MonoBehaviour
 {
-    private int frame_rate = 0;
-    public int delaytime;
-    private int destroytime;
+    public float delaytime;
+    private float destroytime;
     private bool oncetrigger=false;
     private int respawn_time;
     public GameObject log;
@@ -14,13 +13,13 @@ public class disappearingground : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        destroytime = delaytime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        frame_rate += 1;
+       
        // Debug.Log(frame_rate);
         //Debug.Log(oncetrigger);
        // Debug.Log("destroytime");
@@ -29,32 +28,20 @@ public class disappearingground : MonoBehaviour
 
             if (oncetrigger == true)
             {
-                destroytime = frame_rate + delaytime;
-                oncetrigger = false;
-                respawn_time = frame_rate + delaytime *2;
-                }
+                destroytime -= Time.deltaTime;
+        
+            }
 
-            if (frame_rate == destroytime && oncetrigger == false)
+            if (destroytime < 0 )
             {
                 this.gameObject.SetActive(false);
                 Debug.Log("activate");
+                oncetrigger = false;
 
             }
 
-            if (oncetrigger == false && GameObject.Find("Fallinglog(Clone)"))
-        {
-            // this is to recreate the log after it is distroyed
-        }
-        if (GameObject.Find("Fallinglog(Clone)") == null && frame_rate == respawn_time)
-        {
-            // creates an instance of the game object
-            Instantiate(log);
+
         
-        
-        
-        
-        
-        }
            
 
 

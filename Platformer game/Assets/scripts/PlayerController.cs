@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // position of the player start 
-    private float origin_x;
-    private float origin_y;
-    public float respawndelay;
-    private bool Dead = false;
     // Animation variables 
     Animator anim;
     public bool moving = false;
@@ -21,7 +16,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb; // create reference for the rigidbody becuase jump requires physics
     public float jumpForce;// the force that will be added to the vertical component of player's velocity
     public float speed;
-    
+
     public float hangtime; // this is the period of time after the player has left the ground in which they can press jump.
     private float hangcounter;
     //ground check Variable 
@@ -39,9 +34,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        origin_x = transform.position.x;
-        origin_y = transform.position.y;
-        //Debug.Log( origin);
+       
 
 
 
@@ -66,8 +59,8 @@ public class PlayerController : MonoBehaviour
             // this line of code is to activate the walk animation
             moving = true;
         }
-        
-        if (Input.GetKey("d")|| Input.GetKey(KeyCode.RightArrow)) 
+
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             newPosition.x += speed;
 
@@ -75,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
             //controlls walking animation
             moving = true;
-        
-        
-        
+
+
+
         }
         if (Input.GetKeyUp("a") || Input.GetKeyUp("d") || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
@@ -90,13 +83,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true || hangcounter > 0))
-            // get keydown check for the inital key press
+        if ((Input.GetKeyDown("w") || Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true || hangcounter > 0))
+        // get keydown check for the inital key press
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             // the line above sets the velocity to a new vector2 variable with a the x velocity remaining as is and the y velocity is assign jumpforce
 
-            
+
         }
 
         // this line of code allow the character to do half jumps
@@ -113,21 +106,12 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if ( Dead != false) 
-        {
-            respawndelay -= Time.deltaTime;
-            if (respawndelay > 0)
-            {
-                Debug.Log("TESTING");
-            }
-
-        }
 
 
 
 
         anim.SetBool("isMoving", moving);
-        anim.SetBool("isJumping", jumping);  
+        anim.SetBool("isJumping", jumping);
         transform.position = newPosition;
         transform.localScale = newScale;
 
@@ -138,20 +122,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-        
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("deathzone"))
-        {
-            Debug.Log("hit your dead");
-            Dead = true;
-            this.gameObject.SetActive(false);
-
-
-
-
-        }
-    }
 }
+
+   
