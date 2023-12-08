@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Hori_platformer : MonoBehaviour
+public class verti_platformer : MonoBehaviour
 {
 
 
