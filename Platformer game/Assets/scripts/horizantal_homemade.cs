@@ -15,6 +15,7 @@ public class horizantal_homemade : MonoBehaviour
     private bool endstop = false;
     private bool timer_trigger = true;
     private bool trigger_movement;// moves the trap
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class horizantal_homemade : MonoBehaviour
     void Update()
     {
         Vector3 newposition = transform.position;
+        Vector3 newplayerPosition = player.transform.position;
 
         if (timer_trigger == true)
         {
@@ -86,12 +88,33 @@ public class horizantal_homemade : MonoBehaviour
             endstop = false;
             stop_timer = stop_time;
             timer_trigger = true;
+           
         }
+        if (timer_trigger == true && (starting_timer > 0 || stop_timer >0))
+        {
+            player.transform.parent = null;
+        }
+        if(newplayerPosition == newposition)
+       {
+            player.transform.parent = this.transform;
+       }
+        
 
 
         transform.position = newposition;
+        
 
 
 
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))
+        {
+            Debug.Log("landed");
+            player.transform.parent = this.transform;
+
+        }
+      
     }
 }
