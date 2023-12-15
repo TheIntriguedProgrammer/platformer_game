@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class disappearingground : MonoBehaviour
 {
-    private int frame_rate = 0;
-    public int delaytime;
-    private int destroytime;
+    public float delaytime;
+    private float destroytime;
     private bool oncetrigger=false;
+    private int respawn_time;
+    public GameObject log;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        destroytime = delaytime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        frame_rate += 1;
+       
        // Debug.Log(frame_rate);
         //Debug.Log(oncetrigger);
        // Debug.Log("destroytime");
@@ -27,15 +28,22 @@ public class disappearingground : MonoBehaviour
 
             if (oncetrigger == true)
             {
-                destroytime = frame_rate + delaytime;
-                oncetrigger = false; }
+                destroytime -= Time.deltaTime;
+        
+            }
 
-            if (frame_rate == destroytime && oncetrigger == false)
+            if (destroytime < 0 )
             {
-                Destroy(this.gameObject);
+                this.gameObject.SetActive(false);
                 Debug.Log("activate");
+                oncetrigger = false;
 
             }
+
+
+        
+           
+
 
             
 
@@ -48,7 +56,7 @@ public class disappearingground : MonoBehaviour
 
         if (collision.gameObject.tag.Equals("Player")){
 
-            oncetrigger=true;
+            oncetrigger=true; // changes when the player lands on the platform.
             Debug.Log("landed");
 
         }

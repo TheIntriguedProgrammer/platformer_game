@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;// the force that will be added to the vertical component of player's velocity
     public float speed;
 
+    public float hangtime; // this is the period of time after the player has left the ground in which they can press jump.
+    private float hangcounter;
     //ground check Variable 
     // tells that the player is one the "ground layer"
     // layer assign to the ground
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+       
+
 
 
     }
@@ -55,8 +59,8 @@ public class PlayerController : MonoBehaviour
             // this line of code is to activate the walk animation
             moving = true;
         }
-        
-        if (Input.GetKey("d")|| Input.GetKey(KeyCode.RightArrow)) 
+
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             newPosition.x += speed;
 
@@ -64,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
             //controlls walking animation
             moving = true;
-        
-        
-        
+
+
+
         }
         if (Input.GetKeyUp("a") || Input.GetKeyUp("d") || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
@@ -75,27 +79,39 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             jumping = false;
+            hangcounter = hangtime; // here we are setting the hangcounter to hangtime
         }
 
 
-        if ((Input.GetKeyDown("w")|| Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded == true)
-            // get keydown check for the inital key press
+        if ((Input.GetKeyDown("w") || Input.GetKeyDown(KeyCode.UpArrow)) && (isGrounded == true || hangcounter > 0))
+        // get keydown check for the inital key press
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             // the line above sets the velocity to a new vector2 variable with a the x velocity remaining as is and the y velocity is assign jumpforce
 
-            
+
         }
+
+        // this line of code allow the character to do half jumps
+        if (Input.GetKeyUp("w") && rb.velocity.y > 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce * 0.5f);
+        }
+
+
         if (isGrounded != true)
         {
             jumping = true;
+            hangcounter -= Time.deltaTime; // this piece of code reduces the hangcounter after each frame.
         }
+
+
 
 
 
 
         anim.SetBool("isMoving", moving);
-        anim.SetBool("isJumping", jumping);  
+        anim.SetBool("isJumping", jumping);
         transform.position = newPosition;
         transform.localScale = newScale;
 
@@ -106,6 +122,9 @@ public class PlayerController : MonoBehaviour
 
 
 
-        
+
     }
+
 }
+
+   
