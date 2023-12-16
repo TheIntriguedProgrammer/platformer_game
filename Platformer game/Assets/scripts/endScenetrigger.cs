@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class endScenetrigger : MonoBehaviour
 {
+    public int Scenetoload;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,7 @@ public class endScenetrigger : MonoBehaviour
         if (collision.gameObject.tag.Equals("Player"))
         {
             Debug.Log("hit stone portal");
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(Scenetoload);
 
 
         }
